@@ -1,0 +1,52 @@
+<div id="container" style="width:100%;"> 
+  <mat-card class="p-3 mb-2 bg-primary"> 
+                  Candidate Details
+                       </mat-card>                                  
+  <div id="left" style="float:left; width:80%;"> 
+   
+            
+                  <mat-card class="p-3 mb-2 bg-important" >
+                    {{currentQuestionIndex+1 }}
+{{ questions[currentQuestionIndex].QuestionText}}
+                     
+                  </mat-card>
+                  <mat-card class="p-3 mb-2 bg-secondary" >
+                     <!-- <div *ngFor="let option of questions[currentQuestionIndex].Options; let idx = index" class="row">
+                       <div class="input-group col-md-1" >
+                       <div class="input-group-prepend">
+                       <div class="input-group-text">
+                             
+                       <input type="radio" name= "options"[checked]="option.ID === questions[currentQuestionIndex].SelectedOptionId"  (click) = "OnOptionSelect(option)">
+                       {{option.OptionText}}
+                       </div>
+                      </div>
+                      </div>         
+                      </div>               -->
+                      <mat-card *ngIf="IsProgressSpinnerVisible">
+                          <mat-spinner  style="margin:0 auto;"></mat-spinner>
+                      </mat-card>
+                      <mat-card class="p-3 mb-2 bg-important" >
+    
+                          <mat-radio-group class="example-radio-group">
+                              <mat-radio-button class="example-radio-button"  *ngFor="let option of questions[currentQuestionIndex].Options; let idx = index" [value]="option" [checked]="option.ID === questions[currentQuestionIndex].SelectedOptionId" (click) = "OnOptionSelect(option)">
+                                {{option.OptionText}}
+                              </mat-radio-button>
+                            </mat-radio-group>
+                        </mat-card>
+                     </mat-card>
+                 
+                     <div   *ngIf="currentQuestionIndex>0">
+                                  <button type="button" (click)="btnPreviousClick()" style="float: left;" class="btn">previous</button>
+                              </div>
+                              <div *ngIf="currentQuestionIndex<(questions.length-1)"  >
+                                      <button type="button" (click)="btnNextClick()" style="float: right;"  class="btn">next</button>
+                          </div> 
+  </div> 
+  <div class="bg-secondary" style="width:1%;">
+          
+         </div>    
+  <div id="right" class="bg-secondary" style="float:right; width:19%;">
+           <app-answer-statatus (OnQuestionNumberClick)="OnQuestionNumberClick($event)"  *ngFor="let questionNum of createRange();" [questionsList]="questions" [questionNumber] = "questionNum" [answerStatusButtonsForRow]="answerStatusButtonForRow"></app-answer-statatus>    
+  
+  </div>                   
+</div> 
