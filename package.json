@@ -31,6 +31,10 @@
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
+  "engines" : { 
+    "node" : ">=6.9.3",
+    "npm" : "~2.15.9" 	
+    },
   "devDependencies": {
     "@angular/cli": "1.6.8",
     "@angular/compiler-cli": "^5.2.0",
@@ -51,4 +55,5 @@
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
   }
+  
 }
