@@ -29,7 +29,7 @@
     "kuduscript": "^1.0.16",
     "materialize-css": "^0.100.2",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19" 
   },
   "devDependencies": {
     "@angular/cli": "1.6.8",
