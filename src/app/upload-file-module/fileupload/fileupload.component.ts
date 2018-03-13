@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import {FileService} from '../services/fileupload.service';
+
+
+
 
 @Component({
   selector: 'app-fileupload',
@@ -6,10 +10,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fileupload.component.css']
 })
 export class FileuploadComponent implements OnInit {
+  private formData: FormData = new FormData();
+@Input()  Description : string ;
 
-  constructor() { }
+  constructor(private fileService:FileService) { }
 
   ngOnInit() {
   }
+  OnFileUpload(event:any)
+  {
+    let files = event.target.files; 
 
+    if (files.length > 0) {
+  
+      for (var j = 0; j < files.length; j++) {
+          this.formData.append("file[]", files[j], files[j].name);
+      }
+      
+    }
+      
+  }
+  
+
+OnSubmitClick()
+{
+  var parameters = {
+    description: this.Description,
+    
 }
+  this.fileService.upload(this.formData,parameters)
+  .subscribe(
+  success => {
+   
+    console.log(success)
+  },
+  error => {
+      
+      
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+  }
+
+

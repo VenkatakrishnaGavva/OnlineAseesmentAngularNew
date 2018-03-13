@@ -11,7 +11,12 @@ import { of } from 'rxjs/observable/of'
   templateUrl: './question-paper.component.html',
   styleUrls: ['./question-paper.component.css']
 })
+
+
 export class QuestionPaperComponent implements OnInit {
+
+  
+rightAnsweredCount  : number = 0;
 questions : Question[];
 currentQuestion:Question;
 currentQuestionNumber : number;
@@ -19,6 +24,10 @@ currentQuestionIndex : number;
 answerStatusButtonForRow :number;
 IsProgressSpinnerVisible :boolean;
   constructor(private questionService:QuestionPaperService) {
+    
+   
+
+
     this.IsProgressSpinnerVisible = true;
  this.answerStatusButtonForRow = 5;
   
@@ -26,10 +35,10 @@ IsProgressSpinnerVisible :boolean;
 
   ngOnInit() {
    
-    this.questionService.getNameFromService().subscribe(model=>this.assignQuestionPaper(model));
+    this.questionService.getQuestionPaper().subscribe(model=>this.assignQuestionPaper(model));
     
   }
-  assignQuestionPaper(model)
+  assignQuestionPaper(model:Question[])
   {
    
     this.questions = model;
@@ -49,7 +58,29 @@ IsProgressSpinnerVisible :boolean;
     this.currentQuestionIndex = this.currentQuestionIndex-1;
     
   }
+btnSubmitClick()
+{
 
+let isWillingToSubmit = confirm("Do you really want to submit the Answers?");
+if(isWillingToSubmit)
+{
+  this.CalculateResult();
+  window.location.href="ExamResult";
+}
+}
+CalculateResult()
+{
+  this.rightAnsweredCount =0;
+  for (let i = 0; i < this.questions.length ; i++) {
+    let question = this.questions[i];
+   
+    if(question.SelectedOptionId == question.RightOptionId)
+    {
+      this.rightAnsweredCount = this.rightAnsweredCount+1;
+    }
+    sessionStorage.setItem("rightAnsweredCount",this.rightAnsweredCount.toString());
+  }
+}
   OnOptionSelect(option:Options)
   {
     

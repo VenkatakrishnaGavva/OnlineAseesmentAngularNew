@@ -11,9 +11,10 @@ export class QuestionPaperService {
   
  
   constructor(private http : HttpClient) { }
-  getNameFromService(): Observable<Question[]> 
+  getQuestionPaper(): Observable<Question[]> 
   {
-    return this.http.get<Question[]>("https://onlineassessmentappnew.azurewebsites.net/api/GetQuestionPaper");
+  return this.http.get<Question[]>("http://localhost:8090/api/GetQuestionPaper");
+
 
   }
 

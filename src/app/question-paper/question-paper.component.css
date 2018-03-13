@@ -10,7 +10,7 @@
   .example-selected-value {
     margin: 15px 0;
   }
-  
+  p { word-break: break-all }
   .customDiv
   {
     Margin:3px;
