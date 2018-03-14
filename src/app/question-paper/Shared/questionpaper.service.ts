@@ -13,7 +13,7 @@ export class QuestionPaperService {
   constructor(private http : HttpClient) { }
   getQuestionPaper(): Observable<Question[]> 
   {
-  return this.http.get<Question[]>("http://localhost:8090/api/GetQuestionPaper");
+  return this.http.get<Question[]>("https://onlineassessmentappwebapi20180312085836.azurewebsites.net/api/GetQuestionPaper");
 
 
   }
