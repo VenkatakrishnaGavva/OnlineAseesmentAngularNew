@@ -5,11 +5,15 @@ import {RouterModule,Route} from '@angular/router'
 
  import { QuestionpaperuploadComponent }  from './app/questionpaperupload/questionpaperupload.component';
 import {ExamresultComponent} from'./app/examresult/examresult.component';
+import { AuthGuardService as AuthGuard } from './app/auth/auth-guard.service';
+import { LoginComponent } from './app/login/login.component';
+
 const routes: Route[] = [
-    { path: '', component: QuestionPaperComponent },
-  { path: 'QuestionPaper', component: QuestionPaperComponent },
-  {path:'ExamResult',component:ExamresultComponent},
-  { path: 'QuestionPaperUpload', component: QuestionpaperuploadComponent }
+    { path: '', component: QuestionPaperComponent,canActivate:[AuthGuard] },
+    { path: 'login', component: LoginComponent },
+  { path: 'QuestionPaper', component: QuestionPaperComponent,canActivate:[AuthGuard] },
+  {path:'ExamResult',component:ExamresultComponent,canActivate:[AuthGuard]},
+  { path: 'QuestionPaperUpload', component: QuestionpaperuploadComponent,canActivate:[AuthGuard] }
 ];
 @NgModule({
   exports: [ RouterModule  ],

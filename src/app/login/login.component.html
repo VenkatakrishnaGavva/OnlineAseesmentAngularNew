@@ -1,0 +1,19 @@
+
+<div class="alert alert-danger" *ngIf="!IsLoginSucess">
+  <strong>Login failed!Please enter valid credentials!</strong>
+</div>
+
+  <div class="form-group">
+    <label for="email">User name:</label>
+    <input type="email" class="form-control" id="username" [(ngModel)]="username"/>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd" [(ngModel)]="password"/>
+  </div>
+
+
+  <button (click)="Login()" class="btn btn-default">Submit</button>
+
+
+

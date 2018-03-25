@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { CandidatedetailsComponent } from './candidatedetails/candidatedetails.component';
 import { QuestionPaperComponent } from './question-paper/question-paper.component';
 import { AnswerStatatusComponent } from './answer-statatus/answer-statatus.component';
 import { HttpClientModule } from '@angular/common/http';
 import {QuestionPaperService} from './question-paper/Shared/questionpaper.service'
+import {AuthService} from './auth/auth.service'
+import {TokenInterceptor} from'../token.interceptor'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule,MatGridListModule,MatToolbarModule,MatIconModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
@@ -27,6 +29,9 @@ import { FusionChartsModule } from 'angular4-fusioncharts';
 import { FileService } from './upload-file-module/services/fileupload.service';
 import { QuestionpaperuploadComponent } from './questionpaperupload/questionpaperupload.component';
 import { ExamresultComponent } from './examresult/examresult.component';
+import { LoginComponent } from './login/login.component';
+import {AuthGuardService} from './auth/auth-guard.service'
+import { AccountMangementService } from './login/Shared/accountmanagementservice.service';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
 
 @NgModule({
@@ -36,9 +41,15 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
     QuestionPaperComponent,
     AnswerStatatusComponent,
     QuestionpaperuploadComponent,
-    ExamresultComponent
+    ExamresultComponent,
+    LoginComponent
   ],
-  providers: [HttpClient,QuestionPaperService,FileService],
+  
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },HttpClient,QuestionPaperService,FileService,AuthService,AuthGuardService,AccountMangementService],
   bootstrap: [AppComponent],
   imports:[QuestionPaperAppRoutingModule,FormsModule,FusionChartsModule,UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule],
   exports:[UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule]
