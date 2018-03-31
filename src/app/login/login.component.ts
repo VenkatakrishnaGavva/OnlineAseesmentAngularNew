@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 public username:string;
 public password:string ;
 public showLoginForm :boolean = true;
-  constructor(private accountManagementService:AccountMangementService,private router: Router,private authService: AuthService) {
+  constructor(public accountManagementService:AccountMangementService,private router: Router,private authService: AuthService) {
     
    }
    
