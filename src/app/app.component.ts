@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  onActivate($event:any)
+  {
+if(this.router.url === '/login')
+{
+  this.authService.isRouteroutletLoaded = false;
+}
+else{
+    this.authService.isRouteroutletLoaded = true;
+}
+  }
+  constructor(private authService:AuthService,private router:Router) { 
+   
+  }
+
   title = 'app';
   
   displayedColumns = ['position', 'name', 'weight', 'symbol'];

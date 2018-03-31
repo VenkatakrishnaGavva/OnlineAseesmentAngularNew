@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 
@@ -10,12 +11,12 @@ export class AccountMangementService {
   
  public IsLoginSucess :boolean = true;
   constructor(private http : HttpClient,private authService: AuthService,private router: Router) { }
-  public ValidateLoginAndSetToken(username:string, password:string): void {
-   
-   this.AuthenticateUserAndSetToken(username,password);
+  public ValidateLoginAndSetToken(username:string, password:string):void {
+    let res = (this.AuthenticateUserAndSetToken(username,password));
+
   
   }
- private AuthenticateUserAndSetToken(username:string, password:string) :void
+ private AuthenticateUserAndSetToken(username:string, password:string) 
  {    
     let headers = new HttpHeaders();
    
@@ -27,27 +28,29 @@ urlSearchParams.append('password', password);
 let body = urlSearchParams.toString()
 
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-   let token = this.http.post<any>("https://onlineassessmentapi.azurewebsites.net/token",body,{headers:headers});
+   let token = this.http.post<any>("http://localhost:58695/token",body,{headers:headers});
+   
+token.subscribe(tokenresult=>{this.PostAuthenticationSucess(tokenresult)},error=>{
   
-token.subscribe(tokenresult=>localStorage.setItem("token",tokenresult.access_token),error=>{
-
-  if(error.status==400)
-  {
-    this.IsLoginSucess= false;
+  if (error instanceof HttpErrorResponse) {
+    if (error.status === 400) {
+      this.IsLoginSucess = false;
+    }
   }
 });
 
 
-if(this.authService.redirectUrl==undefined)
-{
-  this.router.navigate(["/"]);
-}
-else{
-  this.router.navigate([this.authService.redirectUrl]);
-}
+
 
  }
-  
+ PostAuthenticationSucess(tokenresult:any)
+ {
+  location.replace("/");
+   setTimeout(() => {
+    localStorage.setItem("token",tokenresult.access_token);
+   }, 100);
+   
+ }
   
   
 }

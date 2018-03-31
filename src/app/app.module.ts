@@ -32,8 +32,10 @@ import { ExamresultComponent } from './examresult/examresult.component';
 import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from './auth/auth-guard.service'
 import { AccountMangementService } from './login/Shared/accountmanagementservice.service';
-FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
 
+FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
+import { Router } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
     AnswerStatatusComponent,
     QuestionpaperuploadComponent,
     ExamresultComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   
   providers: [{
@@ -55,4 +58,6 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
   exports:[UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule]
   
 })
-export class AppModule { }
+export class AppModule { 
+
+}
