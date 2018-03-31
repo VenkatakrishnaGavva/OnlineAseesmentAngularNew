@@ -20,10 +20,11 @@ public showLoginForm :boolean = true;
    }
    
   ngOnInit() {
+
     if(this.authService.isAuthenticated())
     {
      
-      if(this.authService.redirectUrl==undefined)
+      if(!this.authService.redirectUrl)
       {
         location.replace("/");
       }

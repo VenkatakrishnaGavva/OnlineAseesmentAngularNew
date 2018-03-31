@@ -33,7 +33,7 @@ export class TokenInterceptor implements HttpInterceptor {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 400) {
           this.router.navigate(['/login']);
-          localStorage.setItem("token",null);
+          sessionStorage.setItem("token",null);
         }
       }
     });

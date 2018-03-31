@@ -20,16 +20,25 @@ export class AccountMangementService {
  {    
     let headers = new HttpHeaders();
    
-let urlSearchParams = new URLSearchParams();
+// let urlSearchParams = new URLSearchParams();
+
+// urlSearchParams.append('grant_type', 'password');
+// urlSearchParams.append('username', username);
+// urlSearchParams.append('password', password);
+// let body = urlSearchParams.toString()
+
+//     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+//    let token = this.http.post<any>("https://onlineassessmentapi.azurewebsites.net/token",body,{headers:headers});
+   let urlSearchParams = new URLSearchParams();
 
 urlSearchParams.append('grant_type', 'password');
 urlSearchParams.append('username', username);
 urlSearchParams.append('password', password);
 let body = urlSearchParams.toString()
 
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Content-Type', 'application/json');
    let token = this.http.post<any>("https://onlineassessmentapi.azurewebsites.net/token",body,{headers:headers});
-   
+
 token.subscribe(tokenresult=>{this.PostAuthenticationSucess(tokenresult)},error=>{
   
   if (error instanceof HttpErrorResponse) {
@@ -47,7 +56,7 @@ token.subscribe(tokenresult=>{this.PostAuthenticationSucess(tokenresult)},error=
  {
   location.replace("/");
    setTimeout(() => {
-    localStorage.setItem("token",tokenresult.access_token);
+    sessionStorage.setItem("token",tokenresult.access_token);
    }, 100);
    
  }
