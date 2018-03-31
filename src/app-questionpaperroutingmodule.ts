@@ -10,7 +10,7 @@ import { LoginComponent } from './app/login/login.component';
 
 const routes: Route[] = [
     { path: 'login', component: LoginComponent },
-  { path: '', component: LoginComponent,canActivate:[AuthGuard] },
+  { path: '', component: QuestionPaperComponent, canActivate:[AuthGuard] },
   { path: 'QuestionPaper', component: QuestionPaperComponent,canActivate:[AuthGuard] },
   {path:'ExamResult',component:ExamresultComponent,canActivate:[AuthGuard]},
   { path: 'QuestionPaperUpload', component: QuestionpaperuploadComponent,canActivate:[AuthGuard] }
