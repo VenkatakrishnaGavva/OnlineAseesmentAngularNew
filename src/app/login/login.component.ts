@@ -29,6 +29,7 @@ public showLoginForm :boolean = true;
         location.replace("/");
       }
       else{
+        alert("");
         this.router.navigate[this.authService.redirectUrl];
       }
     }

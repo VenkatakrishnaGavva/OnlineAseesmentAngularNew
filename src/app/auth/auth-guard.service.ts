@@ -13,6 +13,8 @@ constructor(private authService: AuthService, private router: Router) {}
   }
 
   checkLogin(url: string): boolean {
+   
+    
     if (this.authService.isAuthenticated()) { 
     return true; }
 

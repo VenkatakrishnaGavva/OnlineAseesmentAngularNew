@@ -25,7 +25,7 @@ public isRouteroutletLoaded :boolean = false;
     // get the token
 
     const token :string = this.getToken();
-
+    
     if(!token)
     {
    
