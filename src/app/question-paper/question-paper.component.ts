@@ -35,7 +35,7 @@ IsProgressSpinnerVisible :boolean;
 
   ngOnInit() {
    
-    this.questionService.getQuestionPaper().subscribe(model=>this.assignQuestionPaper(model));
+   // this.questionService.getQuestionPaper().subscribe(model=>this.assignQuestionPaper(model));
     
   }
   assignQuestionPaper(model:Question[])
