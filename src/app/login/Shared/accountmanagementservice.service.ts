@@ -46,9 +46,9 @@ export class AccountMangementService {
  PostAuthenticationSucess(tokenresult:any)
  {
   location.replace("/");
-   setTimeout(() => {
+ 
     sessionStorage.setItem("token",tokenresult.access_token);
-   }, 2000);
+   
    
  }
   
