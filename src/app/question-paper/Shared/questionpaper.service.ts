@@ -11,11 +11,11 @@ export class QuestionPaperService {
   
  
   constructor(private http : HttpClient) { }
-  getQuestionPaper(): Observable<Question[]> 
-  {
-  return this.http.get<Question[]>("https://onlineassessmentappwebapi20180312085836.azurewebsites.net/api/GetQuestionPaper");
+  // getQuestionPaper(): Observable<Question[]> 
+  // {
+  // return this.http.get<Question[]>("https://onlineassessmentappwebapi20180312085836.azurewebsites.net/api/GetQuestionPaper");
 
 
-  }
+  // }
 
 }
