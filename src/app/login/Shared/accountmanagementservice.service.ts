@@ -48,7 +48,7 @@ export class AccountMangementService {
   location.replace("/");
    setTimeout(() => {
     sessionStorage.setItem("token",tokenresult.access_token);
-   }, 100);
+   }, 2000);
    
  }
   
