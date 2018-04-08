@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  onActivate($event:any)
+public onActivate($event:any)
   {
 if(this.router.url === '/login')
 {
@@ -18,7 +18,7 @@ else{
     this.authService.isRouteroutletLoaded = true;
 }
   }
-  constructor(private authService:AuthService,private router:Router) { 
+  constructor(public authService:AuthService,private router:Router) { 
    
   }
 

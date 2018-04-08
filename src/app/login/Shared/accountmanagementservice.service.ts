@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
+import { ApiService } from '../../api.service';
 
 @Injectable()
 
 export class AccountMangementService {
   
  public IsLoginSucess :boolean = true;
-  constructor(private http : HttpClient,private authService: AuthService,private router: Router) { }
+  constructor(private authService: AuthService,private router: Router,private api:ApiService) { }
   public ValidateLoginAndSetToken(username:string, password:string):void {
     let res = (this.AuthenticateUserAndSetToken(username,password));
 
@@ -18,17 +19,16 @@ export class AccountMangementService {
   }
  private AuthenticateUserAndSetToken(username:string, password:string) 
  {    
-  let headers = new HttpHeaders();
+ 
    
   let urlSearchParams = new URLSearchParams();
   
   urlSearchParams.append('grant_type', 'password');
   urlSearchParams.append('username', username);
   urlSearchParams.append('password', password);
-  let body = urlSearchParams.toString()
+  let body = urlSearchParams.toString();
   
-      headers.append('Content-Type', 'application/x-www-form-urlencoded');
-     let token = this.http.post<any>("https://onlineassessmentapi.azurewebsites.net/token",body,{headers:headers});
+       let token = this.api.PostWithURLSerachParams("token",body);
   
   token.subscribe(tokenresult=>{this.PostAuthenticationSucess(tokenresult)},error=>{
     
@@ -46,9 +46,8 @@ export class AccountMangementService {
  PostAuthenticationSucess(tokenresult:any)
  {
   location.replace("/");
- 
-    sessionStorage.setItem("token",tokenresult.access_token);
-   
+   sessionStorage.setItem("token",tokenresult.access_token);
+  
    
  }
   

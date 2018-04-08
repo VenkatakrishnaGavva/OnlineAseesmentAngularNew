@@ -14,6 +14,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
    
   }
+  public onActivate($event:any)
+  {
+if(this.router.url === '/login')
+{
+  this.authService.isRouteroutletLoaded = false;
+}
+else{
+    this.authService.isRouteroutletLoaded = true;
+}
+  }
   logout()
   {
     this.router.navigate(['/login']);

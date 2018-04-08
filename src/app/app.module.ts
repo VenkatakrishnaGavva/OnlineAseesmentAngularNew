@@ -36,6 +36,7 @@ import { AccountMangementService } from './login/Shared/accountmanagementservice
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
 import { Router } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,7 @@ import { HeaderComponent } from './header/header.component';
     multi: true
   },HttpClient,QuestionPaperService,FileService,AuthService,AuthGuardService,AccountMangementService],
   bootstrap: [AppComponent],
-  imports:[QuestionPaperAppRoutingModule,FormsModule,FusionChartsModule,UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule],
+  imports:[SharedModule.forRoot(),QuestionPaperAppRoutingModule,FormsModule,FusionChartsModule,UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule],
   exports:[UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule]
   
 })

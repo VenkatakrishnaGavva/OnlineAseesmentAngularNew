@@ -4,23 +4,16 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ApiService } from '../../api.service';
 
 @Injectable()
 export class FileService {
-    _baseURL: string = 'http://onlineassessmentappwebapi20180312085836.azurewebsites.net/api/'
-    constructor(private http: HttpClient) { }
+     constructor(private http: HttpClient,private api:ApiService) { }
 
-    upload(files,params){
-  
-        // options.params = parameters;
-        return  this.http.post(this._baseURL + 'fileupload', files,{params:params })
-                 .map(response => alert(response) )
-                 .catch(error => Observable.throw(error));
+    upload(files,params) : Observable<any>{
+        alert("dsd");
+ return this.api.PostUploadFiles("api/fileupload", files,params);
 
     }
-    getImages(){
-        return this.http.get(this._baseURL + "getimages")
-                   .map(response =>alert(response))
-                   .catch(error => Observable.throw(error));
-    }
+   
 }
