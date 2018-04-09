@@ -2,6 +2,7 @@
 
 <app-header *ngIf="authService.isAuthenticated()&&authService.isRouteroutletLoaded">
     </app-header> 
+   
 <router-outlet  (activate)='onActivate($event)' ></router-outlet>
 
 
