@@ -13,7 +13,7 @@ import {TokenInterceptor} from'../token.interceptor'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule,MatGridListModule,MatToolbarModule,MatIconModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
-import {QuestionPaperAppRoutingModule} from '../app-questionpaperroutingmodule'
+
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -31,12 +31,34 @@ import { QuestionpaperuploadComponent } from './questionpaperupload/questionpape
 import { ExamresultComponent } from './examresult/examresult.component';
 import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from './auth/auth-guard.service'
-import { AccountMangementService } from './login/Shared/accountmanagementservice.service';
+import { AccountMangementService } from './login/Shared/accountmanagement.service';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme, OceanTheme);
-import { Router } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
+import { Router, RouterModule } from '@angular/router';
+
 import { SharedModule } from './shared/shared.module';
+
+import { AppRoutingModule } from '../app-routing'; 
+import { LocationStrategy } from '@angular/common/src/location/location_strategy';
+import { PathLocationStrategy } from '@angular/common';
+import { MasterComponent } from './admin/modules/master/master.component';
+import { HomeComponent } from './home/home/home.component';
+
+import { AddUserComponent } from './admin/modules/master/add-user/add-user.component';
+import { MasterheaderComponent } from './admin/modules/master/header/masterheader/masterheader.component';
+import { LoginlayoutComponent } from './layouts/loginlayout/loginlayout.component';
+import { HomelayoutComponent } from './layouts/homelayout/homelayout.component';
+import { TopnavbarComponent } from './layouts/navbars/topnavbar/topnavbar.component';
+import { SidenavbarComponent } from './layouts/navbars/sidenavbar/sidenavbar.component';
+import { FooterComponent } from './layouts/navbars/footer/footer.component';
+import { AdmindashboardComponent } from './admin/admindashboard/admindashboard.component';
+import { AddmoduleComponent } from './admin/modules/master/addmodule/addmodule.component';
+import { AdmindashboardService } from './admin/admindashboard.service';
+import { PermissionsComponent } from './admin/modules/master/permissions/permissions.component';
+import { AddRoleComponent } from './admin/modules/master/add-role/add-role.component';
+import { RoleModulePermissionMapComponent } from './admin/modules/master/role-module-permission-map/role-module-permission-map.component';
+import { UserService } from './admin/modules/master/add-user/services/user.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,16 +68,32 @@ import { SharedModule } from './shared/shared.module';
     QuestionpaperuploadComponent,
     ExamresultComponent,
     LoginComponent,
-    HeaderComponent
+    LoginlayoutComponent,
+    HomelayoutComponent,
+    MasterComponent,
+    HomeComponent,
+    AddUserComponent,
+    MasterheaderComponent,
+    TopnavbarComponent,
+    SidenavbarComponent,
+    FooterComponent,
+    AdmindashboardComponent,
+    AddmoduleComponent,
+    PermissionsComponent,
+    AddRoleComponent,
+    RoleModulePermissionMapComponent
   ],
   
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
+    
     multi: true
-  },HttpClient,QuestionPaperService,FileService,AuthService,AuthGuardService,AccountMangementService],
+  },
+  UserService, AdmindashboardService,HttpClient,QuestionPaperService,FileService,AuthService,AuthGuardService,AccountMangementService],
   bootstrap: [AppComponent],
-  imports:[SharedModule.forRoot(),QuestionPaperAppRoutingModule,FormsModule,FusionChartsModule,UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule],
+  imports:[AppRoutingModule,SharedModule.forRoot(),FormsModule,ReactiveFormsModule, FusionChartsModule,UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule
+  ],
   exports:[UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule]
   
 })

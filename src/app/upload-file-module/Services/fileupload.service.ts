@@ -11,7 +11,7 @@ export class FileService {
      constructor(private http: HttpClient,private api:ApiService) { }
 
     upload(files,params) : Observable<any>{
-        alert("dsd");
+    
  return this.api.PostUploadFiles("api/fileupload", files,params);
 
     }

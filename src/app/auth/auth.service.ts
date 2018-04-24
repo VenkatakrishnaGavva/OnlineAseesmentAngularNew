@@ -20,32 +20,38 @@ public isRouteroutletLoaded :boolean = false;
     sessionStorage.setItem("token","");
     this.isRouteroutletLoaded = false;
     this.logoutClick = true;
+    
   }
   public isAuthenticated(): boolean {
     // get the token
 
     const token :string = this.getToken();
-    
+  
     if(!token)
     {
    
+      return false;
+    }
+
+    if(token=="null")
+    {
+   
+      return false;
+    }
+  
+    if(token==="null")
+    {
+   
+      return false;
+    }
+
+    if(token=="empty")
+    {
       return false;
     }
     else{
     return true;
     }
   }
-  public isAuthenticatedasync(): Observable<boolean> {
-    // get the token
-
-    const token = this.getToken();
-
-    if(token==="null")
-    {
-      return of(false);
-    }
-    else{
-    return of(true);
-    }
-  }
+  
 }

@@ -1,0 +1,8 @@
+.btn-secondary.active, 
+.btn-secondary:active, 
+.open>.dropdown-toggle.btn-secondary {
+    color: #fff;
+    background-color: #A30000;
+    border-color: #A30000;
+}
+

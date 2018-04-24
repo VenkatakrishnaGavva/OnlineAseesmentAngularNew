@@ -1,0 +1,86 @@
+<form class="well form-horizontal" [formGroup]="permissionCreationForm">
+  <fieldset>
+  
+   
+  <!-- Text input-->
+  <div class="form-group">
+      <label class="col-md-4 control-label" >Permission Name</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input  name="PermissionName" formControlName="PermissionName" placeholder="PermissionName Name" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+    <div class="form-group"   *ngIf="permissionCreationForm.get('PermissionName').errors &&
+    permissionCreationForm.get('PermissionName').dirty">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4 inputGroupContainer">
+        <div *ngIf="permissionCreationForm.get('PermissionName').errors.required" class="input-group alert-danger">
+            Permission Name is required!
+           </div>  
+      <div *ngIf="permissionCreationForm.get('PermissionName').errors.IsPermissionAlreadyExists" class="input-group alert-danger">
+          Permission name is already exists!
+        </div>
+       
+        </div>
+   </div>
+     
+   <div class="form-group">
+    <label class="col-md-4 control-label" >Module Name</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <select formControlName="ModuleNameList" id="modulename" class="form-control">
+      <option></option>
+      <option *ngFor="let module of  moduleNameList"
+              [value]="module.moduleId" >
+        {{module.moduleName}}
+      </option>
+    </select> 
+  </div>
+    </div>
+  </div>
+  
+  <div class="form-group"   *ngIf="this.permissionCreationForm.get('ModuleNameList').errors &&
+  this.permissionCreationForm.get('ModuleNameList').dirty">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4 inputGroupContainer">
+      <div *ngIf="this.permissionCreationForm.get('ModuleNameList').errors.required" class="input-group alert-danger">
+          Module Name is required!
+         </div>  
+     </div>
+     </div>
+
+   <div class="form-group">
+      <label class="col-md-4 control-label" >Description</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input  name="Description" type="text" formControlName="Description" placeholder="Descrption" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+    <div class="form-group"   *ngIf="permissionCreationForm.get('Description').errors &&
+    permissionCreationForm.get('Description').dirty &&
+    permissionCreationForm.get('Description').errors.required">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group alert-danger">
+            Description is required!
+        </div>
+        </div>
+   </div>
+
+ 
+  
+  <!-- Button -->
+  <div class="form-group">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4">
+      <button type="submit"  [disabled]="!permissionCreationForm.valid" class="btn btn-warning" >Create user <span class="glyphicon glyphicon-send"></span></button>
+    </div>
+  </div>
+  
+  </fieldset>
+  </form>

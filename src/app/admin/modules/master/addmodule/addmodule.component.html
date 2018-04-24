@@ -1,0 +1,61 @@
+<form class="well form-horizontal" [formGroup]="moduleCreationForm">
+    <fieldset>
+    
+     
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" >Module Name</label>  
+        <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input  name="ModuleName" formControlName="ModuleName" placeholder="Module Name" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+      <div class="form-group"   *ngIf="moduleCreationForm.get('ModuleName').errors &&
+      moduleCreationForm.get('ModuleName').dirty">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4 inputGroupContainer">
+          <div *ngIf="moduleCreationForm.get('ModuleName').errors.required" class="input-group alert-danger">
+              Module name is required!
+             </div>  
+        <div *ngIf="moduleCreationForm.get('ModuleName').errors.IsModuleExistsConditionFailed" class="input-group alert-danger">
+           Module name is already exists!
+          </div>
+         
+          </div>
+     </div>
+       
+     <div class="form-group">
+        <label class="col-md-4 control-label" >Description</label>  
+        <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        <input  name="Description" type="text" formControlName="Description" placeholder="Descrption" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+      <div class="form-group"   *ngIf="moduleCreationForm.get('Description').errors &&
+      moduleCreationForm.get('Description').dirty &&
+      moduleCreationForm.get('Description').errors.required">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4 inputGroupContainer">
+          <div class="input-group alert-danger">
+              Description is required!
+          </div>
+          </div>
+     </div>
+
+   
+    
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4">
+        <button type="submit"  [disabled]="!moduleCreationForm.valid" class="btn btn-warning" >Create user <span class="glyphicon glyphicon-send"></span></button>
+      </div>
+    </div>
+    
+    </fieldset>
+    </form>
+    

@@ -11,7 +11,7 @@ import { of } from 'rxjs/observable/of';
  export  class ApiService {
   
  public IsLoginSucess :boolean = true;
- public BaseWebApiURL:string= "https://onlineassessmentapi.azurewebsites.net/";
+ public BaseWebApiURL:string= "http://localhost:58695/";
   constructor(private http : HttpClient) { }
  
   public get(url:string):Observable<any>{

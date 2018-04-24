@@ -1,0 +1,62 @@
+
+        <form class="well form-horizontal" [formGroup]="roleCreationForm">
+          <fieldset>
+          
+           
+          <!-- Text input-->
+          <div class="form-group">
+              <label class="col-md-4 control-label" >Role Name</label>  
+              <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input  name="RoleName" formControlName="RoleName" placeholder="Role Name" class="form-control"  type="text">
+                </div>
+              </div>
+            </div>
+            <div class="form-group"   *ngIf="roleCreationForm.get('RoleName').errors &&
+            roleCreationForm.get('RoleName').dirty">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4 inputGroupContainer">
+                <div *ngIf="roleCreationForm.get('RoleName').errors.required" class="input-group alert-danger">
+                    Role name is required!
+                   </div>  
+              <div *ngIf="roleCreationForm.get('RoleName').errors.IsRoleExistsConditionFailed" class="input-group alert-danger">
+                 Role name is already exists!
+                </div>
+               
+                </div>
+           </div>
+             
+           <div class="form-group">
+              <label class="col-md-4 control-label" >Description</label>  
+              <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input  name="Description" type="text" formControlName="Description" placeholder="Descrption" class="form-control"  type="text">
+                </div>
+              </div>
+            </div>
+            <div class="form-group"   *ngIf="roleCreationForm.get('Description').errors &&
+            roleCreationForm.get('Description').dirty &&
+            roleCreationForm.get('Description').errors.required">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group alert-danger">
+                    Description is required!
+                </div>
+                </div>
+           </div>
+      
+         
+          
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+              <button type="submit"  [disabled]="!roleCreationForm.valid" class="btn btn-warning" >Create user <span class="glyphicon glyphicon-send"></span></button>
+            </div>
+          </div>
+          
+          </fieldset>
+          </form>
+      

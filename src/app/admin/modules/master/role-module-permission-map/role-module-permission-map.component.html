@@ -1,0 +1,53 @@
+<form class="well form-horizontal" [formGroup]="mapRoleModulePermissionForm">
+    <fieldset>
+    
+     
+    <!-- Text input-->
+    <div class="form-group">
+        <div class="row" >
+            <div class="col-lg-3 col-xs-6" *ngFor="let module of this.modulePermissionList">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>{{module.ModuleName}}</h3>
+          
+                  <p></p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="checkbox" >
+                <label>                                    
+                    <input type="checkbox"  (checked)="SelectAllCheckBox(module.ModuleName)"/>
+                  select all
+                </label>
+              </div>
+                <div class="checkbox" *ngFor="let permission of module.PermissionList" >
+                  <div class="form-inline">
+                      
+                      <label>                                    
+                          <input type="checkbox" id="{{module.ModuleName}}" />
+                          {{permission.PermissionName}} 
+                      </label>   
+                     
+                  </div>
+              </div>
+
+
+                  
+              </div>
+            </div>
+            
+          </div>
+    </div>
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4">
+        <button type="submit"  [disabled]="!permissionCreationForm.valid" class="btn btn-warning" >Create user <span class="glyphicon glyphicon-send"></span></button>
+      </div>
+    </div>
+    
+    </fieldset>
+    </form>
+  
