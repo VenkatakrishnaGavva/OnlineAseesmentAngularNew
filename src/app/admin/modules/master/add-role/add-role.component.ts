@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { ApiService } from '../../../../api.service';
 
 @Component({
   selector: 'app-add-role',
@@ -9,8 +10,9 @@ import { FormArray, FormBuilder, FormGroup, Validators, AbstractControl } from '
 
 export class AddRoleComponent implements OnInit {
   public roleCreationForm:FormGroup;
-  constructor(private fb:FormBuilder) { 
-
+  public IsRoleCreated:boolean = false;
+  constructor(private fb:FormBuilder, private api:ApiService) { 
+  
     this.roleCreationForm = this.fb.group(
       {
         RoleName: ['', [Validators.required,this.IsRoleAlreadyExists]],
@@ -20,12 +22,28 @@ export class AddRoleComponent implements OnInit {
   }
   IsRoleAlreadyExists(control: AbstractControl) {
    
-    if (control.value=="Admin") {
-      return { IsRoleExistsConditionFailed: true };
-    }
-    return null;
+    // if (control.value=="Admin") {
+    //   return { IsRoleExistsConditionFailed: true };
+    // }
+    // return null;
   }
   ngOnInit() {
+  }
+
+  PostFormData()
+  {
+    if(this.roleCreationForm.valid)
+    {
+      let roleFormData = this.roleCreationForm.value;
+      roleFormData.CreatedBy = sessionStorage.getItem("userid");
+      this.api.Post("api/CreateRole",roleFormData).subscribe(
+
+        response=>
+        {
+          this.IsRoleCreated = true;
+        }
+      )
+    }
   }
 
 }

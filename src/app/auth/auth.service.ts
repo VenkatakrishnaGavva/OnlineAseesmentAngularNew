@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { Subject } from 'rxjs';
 
 @Injectable()
 
 export class AuthService {
-  public redirectUrl: string;
+  public  redirectUrl: Subject<string> = new Subject<string>();
 public logoutClick: boolean = false;
 public isRouteroutletLoaded :boolean = false;
   constructor(private http : HttpClient) { }

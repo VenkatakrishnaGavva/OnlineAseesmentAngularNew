@@ -11,7 +11,7 @@ import {QuestionPaperService} from './question-paper/Shared/questionpaper.servic
 import {AuthService} from './auth/auth.service'
 import {TokenInterceptor} from'../token.interceptor'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule,MatGridListModule,MatToolbarModule,MatIconModule} from '@angular/material';
+import {MatButtonModule,MatGridListModule,MatToolbarModule,MatIconModule, MatDatepicker, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 
 
@@ -58,6 +58,18 @@ import { PermissionsComponent } from './admin/modules/master/permissions/permiss
 import { AddRoleComponent } from './admin/modules/master/add-role/add-role.component';
 import { RoleModulePermissionMapComponent } from './admin/modules/master/role-module-permission-map/role-module-permission-map.component';
 import { UserService } from './admin/modules/master/add-user/services/user.service';
+import { ModuleService } from './admin/modules/master/addmodule/services/module.service';
+import { PermisssionService } from './admin/modules/master/permissions/services/permisssion.service';
+import { RoleModulePermissionMapService } from './admin/modules/master/role-module-permission-map/services/role-module-permission-map.service';
+import { ShowAllUsersComponent } from './admin/modules/master/add-user/show-all-users/show-all-users.component';
+import { EdituserComponent } from './admin/modules/master/add-user/edituser/edituser.component';
+import { SideNavBarMenuService } from './layouts/navbars/sidenavbar/services/side-nav-bar-menu.service';
+import { CreateAssessmentComponent } from './admin/modules/assessment/create-assessment/create-assessment.component';
+import { AssessmentService } from './admin/modules/assessment/services/assessment.service';
+import { MapUserToAssessmentComponent } from './admin/modules/assessment/map-user-to-assessment/map-user-to-assessment.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -81,7 +93,11 @@ import { UserService } from './admin/modules/master/add-user/services/user.servi
     AddmoduleComponent,
     PermissionsComponent,
     AddRoleComponent,
-    RoleModulePermissionMapComponent
+    RoleModulePermissionMapComponent,
+    ShowAllUsersComponent,
+    EdituserComponent,
+    CreateAssessmentComponent,
+    MapUserToAssessmentComponent
   ],
   
   providers: [{
@@ -90,9 +106,9 @@ import { UserService } from './admin/modules/master/add-user/services/user.servi
     
     multi: true
   },
-  UserService, AdmindashboardService,HttpClient,QuestionPaperService,FileService,AuthService,AuthGuardService,AccountMangementService],
+  AssessmentService,SideNavBarMenuService, RoleModulePermissionMapService,PermisssionService,ModuleService,UserService, AdmindashboardService,HttpClient,QuestionPaperService,FileService,AuthService,AuthGuardService,AccountMangementService],
   bootstrap: [AppComponent],
-  imports:[AppRoutingModule,SharedModule.forRoot(),FormsModule,ReactiveFormsModule, FusionChartsModule,UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule
+  imports:[AppRoutingModule,SharedModule.forRoot(),FormsModule,ReactiveFormsModule, FusionChartsModule,UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule,MatDatepickerModule,MatFormFieldModule,MatNativeDateModule,MatInputModule
   ],
   exports:[UploadFileModuleModule,MatIconModule,MatProgressSpinnerModule,MatRadioModule, MatDividerModule,BrowserAnimationsModule,MatButtonModule,BrowserModule,MatGridListModule,HttpClientModule,MatToolbarModule,MatCardModule,MatExpansionModule,MatSidenavModule]
   

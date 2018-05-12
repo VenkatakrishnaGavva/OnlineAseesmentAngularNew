@@ -1,1 +1,51 @@
-<p>This page is visible for authenticated users!</p>
+<app-topnavbar></app-topnavbar>
+<div class="container">  
+    <div class="row">
+      <div class="col-md-8">
+      <div class="customDiv">
+        <mat-card class="p-3 mb-2 bg-primary"> 
+          Candidate Details
+               </mat-card>
+               <mat-card class="p-3 mb-2 bg-important" >
+                {{currentQuestionIndex+1 }}
+    {{ questions[currentQuestionIndex].QuestionText}}
+                 
+              </mat-card>
+             
+                <mat-card *ngIf="IsProgressSpinnerVisible">
+  <mat-spinner  style="margin:0 auto;"></mat-spinner>
+  </mat-card>
+  
+   <!-- <mat-radio-button class="example-radio-button"  *ngFor="let option of questions[currentQuestionIndex].Options; let idx = index" [value]="option" [checked]="option.ID === questions[currentQuestionIndex].SelectedOptionId" (click) = "OnOptionSelect(option)">
+      <p>{{option.OptionText}}</p>
+   </mat-radio-button> -->
+  
+  <p *ngFor="let option of questions[currentQuestionIndex].Options; let idx = index" ><mat-radio-button class="example-radio-button" [value]="option" [checked]="option.ID === questions[currentQuestionIndex].SelectedOptionId" (click) = "OnOptionSelect(option)"></mat-radio-button> {{option.OptionText}}</p>
+  
+  <div   *ngIf="currentQuestionIndex>0">
+       <button type="button" (click)="btnPreviousClick()" style="float: left;" class="btn">previous</button>
+   </div>
+   <div *ngIf="currentQuestionIndex<(questions.length-1)"  >
+           <button type="button" (click)="btnNextClick()" style="float: right;"  class="btn">next</button>
+  </div>
+  <div *ngIf="currentQuestionIndex==(questions.length-1)"  >
+    <button type="button" (click)="btnSubmitClick()" style="float: right;"  class="btn">Submit</button>
+  </div>
+      </div>
+      </div>
+      <div class="col-md-4" >
+          <mat-card class="p-3 mb-2 bg-primary"> 
+              Answer Status
+                   </mat-card>
+        <div class="customDiv">
+          <app-answer-statatus (OnQuestionNumberClick)="OnQuestionNumberClick($event)"  *ngFor="let questionNum of createRange();" [questionsList]="questions" [questionNumber] = "questionNum" [answerStatusButtonsForRow]="answerStatusButtonForRow"></app-answer-statatus>    
+  
+        </div> 
+      </div>
+      
+    </div>
+    </div>
+  
+    
+  
+   

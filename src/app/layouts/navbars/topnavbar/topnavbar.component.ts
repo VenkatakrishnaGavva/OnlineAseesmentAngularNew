@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../auth/auth.service';
+import { Router } from '@angular/router';
+import { AccountMangementService } from '../../../login/Shared/accountmanagement.service';
 
 @Component({
   selector: 'app-topnavbar',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopnavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountService:AccountMangementService, private router:Router) { }
 
   ngOnInit() {
   }
-
+  SignOut()
+  {
+this.accountService.Logout();
+  }
 }

@@ -9,11 +9,12 @@ import { AccountMangementService } from '../../login/Shared/accountmanagement.se
 export class HomeComponent implements OnInit {
 public LoggedinUserId :string ;
   constructor(public accountMangementService:AccountMangementService) { 
- 
-this.LoggedinUserId = sessionStorage.getItem("userid");
+   
+
   }
 
   ngOnInit() {
+    
   }
 
 }

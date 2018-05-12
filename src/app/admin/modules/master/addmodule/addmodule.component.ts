@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { UserService } from '../add-user/services/user.service';
+import { ModuleService } from './services/module.service';
+import { AccountMangementService } from '../../../../login/Shared/accountmanagement.service';
 
 @Component({
   selector: 'app-addmodule',
@@ -8,7 +11,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 })
 export class AddmoduleComponent implements OnInit {
   public moduleCreationForm:FormGroup;
-  constructor(private fb:FormBuilder) {
+ public isModuleCreationSuccess:boolean =false;
+  constructor(private fb:FormBuilder,private moduleService:ModuleService,private accountService:AccountMangementService ) {
     this.moduleCreationForm = this.fb.group(
       {
         ModuleName: ['', [Validators.required,this.IsModuleAlreadyExists]],
@@ -18,13 +22,30 @@ export class AddmoduleComponent implements OnInit {
    }
    IsModuleAlreadyExists(control: AbstractControl) {
    
-    if (control.value=="Master") {
+    if (control.value=="Master1") {
       return { IsModuleExistsConditionFailed: true };
     }
     return null;
   }
+  PostModuleCreationSubmitted(data:any)
+  {
+   if(this.moduleCreationForm.valid)
+   {
+    let moduleFormData = data.value;
+  
+   moduleFormData.CreatedBy =  sessionStorage.getItem("userid");
+    this.moduleService.PostFormData(moduleFormData).subscribe(
 
-  ngOnInit() {
+  response=>{
+this.isModuleCreationSuccess = true;
+
+   this.moduleCreationForm.reset();
   }
+);
+   }
+ 
+}
+ngOnInit() {
+}
 
 }

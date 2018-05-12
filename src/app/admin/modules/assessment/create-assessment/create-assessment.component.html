@@ -1,0 +1,131 @@
+<div class="alert-success" *ngIf="this.IsAssessmentCreated"> 
+Assessment is Created!
+</div>
+<form class="well form-horizontal" [formGroup]="assessmentCreationForm" (ngSubmit)="SubmitFormData()">
+  <fieldset>
+      <div class="form-group">
+          <label class="col-md-4 control-label" >Assessment Name</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input  name="AssessmentName" formControlName="AssessmentName" placeholder="Assessment Name" class="form-control"  type="text">
+            </div>
+          </div>
+        </div>
+        <div class="form-group"   *ngIf="assessmentCreationForm.get('AssessmentName').errors &&
+        assessmentCreationForm.get('AssessmentName').dirty">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4 inputGroupContainer">
+            <div *ngIf="assessmentCreationForm.get('AssessmentName').errors.required" class="input-group alert-danger">
+                Assessment name is required!
+               </div>  
+         
+           
+            </div>
+       </div>
+       <div class="form-group">
+          <label class="col-md-4 control-label" >Description Name</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input  name="AssessmentDescription" formControlName="AssessmentDescription" placeholder="Assessment Description" class="form-control"  type="text">
+            </div>
+          </div>
+        </div>
+        <div class="form-group"   *ngIf="assessmentCreationForm.get('AssessmentDescription').errors &&
+        assessmentCreationForm.get('AssessmentDescription').dirty">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4 inputGroupContainer">
+            <div *ngIf="assessmentCreationForm.get('AssessmentDescription').errors.required" class="input-group alert-danger">
+                Description is required!
+               </div>  
+         
+           
+            </div>
+       </div>
+
+       <div class="form-group">
+          <label class="col-md-4 control-label" >Start Time </label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+          <mat-form-field>
+            <input matInput formControlName="StartTime" [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+             
+        </div>
+          </div>
+        </div>
+        <div class="form-group"   *ngIf="assessmentCreationForm.get('StartTime').errors &&
+        assessmentCreationForm.get('StartTime').dirty">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4 inputGroupContainer">
+            <div *ngIf="assessmentCreationForm.get('StartTime').errors.required" class="input-group alert-danger">
+                Start time is required!
+               </div>  
+         
+           
+            </div>
+       </div>
+       <div class="form-group">
+        <label class="col-md-4 control-label" >End Time </label>  
+        <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+          <mat-form-field>
+            <input matInput formControlName="EndTime" [matDatepicker]="picker1" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+           
+      </div>
+        </div>
+      </div>
+      <div class="form-group"   *ngIf="assessmentCreationForm.get('EndTime').errors &&
+      assessmentCreationForm.get('EndTime').dirty">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4 inputGroupContainer">
+          <div *ngIf="assessmentCreationForm.get('EndTime').errors.required" class="input-group alert-danger">
+              End time is required!
+             </div>  
+       
+         
+          </div>
+     </div>
+
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" >Question Paper Name</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <select formControlName="QuestionPaperId" id="QuestionPaperId" class="form-control">
+        <option></option>
+        <option *ngFor="let questionpaper of this.QuestionPaperNameList"
+                [value]="questionpaper.Id" >
+          {{questionpaper.QuestionPaperName}}
+        </option>
+      </select> 
+    </div>
+      </div>
+    </div>
+    <div class="form-group"   *ngIf="this.assessmentCreationForm.get('QuestionPaperId').errors &&
+this.assessmentCreationForm.get('QuestionPaperId').dirty">
+<label class="col-md-4 control-label"></label>
+<div class="col-md-4 inputGroupContainer">
+    <div *ngIf="this.assessmentCreationForm.get('QuestionPaperId').errors.required" class="input-group alert-danger">
+        Questionpaper Name is required!
+       </div>  
+   </div>
+   </div>
+
+  
+  <div class="form-group">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4">
+      <button type="submit"   class="btn btn-warning" >Create Assessment <span class="glyphicon glyphicon-send"></span></button>
+    </div>
+  </div>
+  
+  </fieldset>
+  </form>

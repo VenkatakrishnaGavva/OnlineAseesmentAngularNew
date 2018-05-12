@@ -19,7 +19,7 @@ constructor(private authService: AuthService, private router: Router) {}
     return true; }
 
     // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
+    this.authService.redirectUrl.next(url);
 
     // Navigate to the login page with extras
     this.router.navigate(['/login']);

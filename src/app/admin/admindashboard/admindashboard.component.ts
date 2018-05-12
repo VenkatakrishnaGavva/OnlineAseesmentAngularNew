@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdmindashboardService } from '../admindashboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-admindashboard',
@@ -10,11 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AdmindashboardComponent implements OnInit {
 public IsDashBoardVisible:boolean = true;
 
-constructor(private router: Router) {
+constructor(private router: Router,private api:ApiService) {
+  this.api.cityList.subscribe(
+response=>{console.log(response)}
+  );
   // override the route reuse strategy
-  this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-  };
+  // this.router.routeReuseStrategy.shouldReuseRoute = function() {
+  //     return false;
+  // };
 }
   ngOnInit() {
       

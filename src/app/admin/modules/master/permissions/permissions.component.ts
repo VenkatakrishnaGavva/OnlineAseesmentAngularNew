@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { PermisssionService } from './services/permisssion.service';
+import { AccountMangementService } from '../../../../login/Shared/accountmanagement.service';
+
 
 @Component({
   selector: 'app-permissions',
@@ -8,28 +11,50 @@ import { FormArray, FormBuilder, FormGroup, Validators, AbstractControl } from '
 })
 export class PermissionsComponent implements OnInit {
   public permissionCreationForm:FormGroup;
-  public moduleNameList  = [{moduleId:1,moduleName:'Master'},
-                        {moduleId:2,moduleName:'Assessment'}
+  public moduleNameList :any[] = [
                        ];
-  public permissionNameList  =[{permissionId:1,permissionName:'Add user'},
-  {permissionId:2,permissionName:'Add role'},
-  {permissionId:3,permissionName:'Add assessment'}
- ];
-  constructor(private fb:FormBuilder) { 
+  public isPermissionCreated:boolean=false;
+  
+  constructor(private fb:FormBuilder, private permissionService:PermisssionService, private accountService:AccountMangementService) { 
     this.permissionCreationForm = this.fb.group(
       {
         PermissionName: ['', [Validators.required,this.IsPermissionAlreadyExists]],
         Description:['',Validators.required],
-        ModuleNameList:[-1,Validators.required]
+        ModuleId:[-1,Validators.required]
       }
+
     );
+
+    this.permissionService.GetAllModules().subscribe(
+      response=>{
+        this.moduleNameList = response;
+      }
+    )
+  }
+
+  PostFormData()
+  {
+   if(this.permissionCreationForm.valid)
+   {
+   let formdata = this.permissionCreationForm.value;
+   
+         formdata.CreatedBy =  sessionStorage.getItem("userid");
+       
+     this.permissionService.PostFormData(formdata).subscribe(
+       result=>{
+        this.permissionCreationForm.reset();
+        this.isPermissionCreated=true;
+        
+       }
+     )
+   }
   }
   IsPermissionAlreadyExists(control: AbstractControl) {
    
-    if (control.value=="Create Admin") {
-      return { IsPermissionExistsConditionFailed: true };
-    }
-    return null;
+    // if (null) {
+    //   return { IsPermissionExistsConditionFailed: true };
+    // }
+    // return null;
   }
   ngOnInit() {
   }

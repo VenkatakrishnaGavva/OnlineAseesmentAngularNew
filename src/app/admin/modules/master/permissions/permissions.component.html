@@ -1,4 +1,9 @@
-<form class="well form-horizontal" [formGroup]="permissionCreationForm">
+
+<div *ngIf="this.isPermissionCreated" class="alert alert-success" >
+  <strong>Permission Successfully Created!</strong>
+  
+</div>
+<form class="well form-horizontal" (ngSubmit)="PostFormData()" [formGroup]="permissionCreationForm">
   <fieldset>
   
    
@@ -8,7 +13,7 @@
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input  name="PermissionName" formControlName="PermissionName" placeholder="PermissionName Name" class="form-control"  type="text">
+      <input  name="PermissionName" formControlName="PermissionName" placeholder="Permission Name" class="form-control"  type="text">
         </div>
       </div>
     </div>
@@ -31,22 +36,22 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-    <select formControlName="ModuleNameList" id="modulename" class="form-control">
+    <select formControlName="ModuleId" id="modulename" class="form-control">
       <option></option>
       <option *ngFor="let module of  moduleNameList"
-              [value]="module.moduleId" >
-        {{module.moduleName}}
+              [value]="module.ModuleId" >
+        {{module.ModuleName}}
       </option>
     </select> 
   </div>
     </div>
   </div>
   
-  <div class="form-group"   *ngIf="this.permissionCreationForm.get('ModuleNameList').errors &&
-  this.permissionCreationForm.get('ModuleNameList').dirty">
+  <div class="form-group"   *ngIf="this.permissionCreationForm.get('ModuleId').errors &&
+  this.permissionCreationForm.get('ModuleId').dirty">
   <label class="col-md-4 control-label"></label>
   <div class="col-md-4 inputGroupContainer">
-      <div *ngIf="this.permissionCreationForm.get('ModuleNameList').errors.required" class="input-group alert-danger">
+      <div *ngIf="this.permissionCreationForm.get('ModuleId').errors.required" class="input-group alert-danger">
           Module Name is required!
          </div>  
      </div>

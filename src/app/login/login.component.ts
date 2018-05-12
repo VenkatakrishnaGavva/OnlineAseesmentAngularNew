@@ -18,8 +18,13 @@ public showLoginForm :boolean = true;
 public loginModel :LoginModel = new LoginModel();
 public loginprocessStarted = false;
 public IsloginSucess = true;
+public RedirectUrl :string;
   constructor(public accountManagementService:AccountMangementService,private router: Router,private authService: AuthService) {
-    
+    this.authService.redirectUrl.subscribe(
+      response=>{
+     this.RedirectUrl = response;
+      }
+    );
     this.accountManagementService.OnLoginCompletedEvent.subscribe(IsValidUser=>{this.PostLoginRequest(IsValidUser)});
    }
    
@@ -40,14 +45,15 @@ this.IsloginSucess=isvalidUser;
     this.loginprocessStarted = true;
      this.accountManagementService.ValidateLoginAndSetToken(this.loginModel.username,this.loginModel.password);
     
-     
+ 
 
   }   
   ngAfterViewInit()
   {
     if(this.authService.isAuthenticated)
     {
-      this.router.navigate(['/']);
+    
+     
     }
   }
   

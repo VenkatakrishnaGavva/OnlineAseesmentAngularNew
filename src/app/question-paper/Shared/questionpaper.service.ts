@@ -6,16 +6,17 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { of } from 'rxjs/observable/of';
 import {Question} from'./questionmodel.model';
+import { ApiService } from '../../api.service';
 @Injectable()
 export class QuestionPaperService {
   
  
-  constructor(private http : HttpClient) { }
-  // getQuestionPaper(): Observable<Question[]> 
-  // {
-  // return this.http.get<Question[]>("https://onlineassessmentappwebapi20180312085836.azurewebsites.net/api/GetQuestionPaper");
+  constructor(private http : HttpClient, private api:ApiService) { }
+  getQuestionPaper(): Observable<Question[]> 
+  {
+  return this.api.get("api/GetQuestionPaper?userId="+sessionStorage.getItem("userid"));
 
 
-  // }
+  }
 
 }

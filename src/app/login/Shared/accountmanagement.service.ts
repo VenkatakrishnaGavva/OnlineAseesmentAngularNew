@@ -5,12 +5,14 @@ import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from '../../api.service';
+import { observableToBeFn } from 'rxjs/testing/TestScheduler';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable()
 
 export class AccountMangementService {
   public OnLoginCompletedEvent: EventEmitter<any> = new EventEmitter();
-  public LoggedinUserId : string;
+  //public LoggedinUserId : ReplaySubject<string>= new ReplaySubject<string>();
 
   constructor(private authService: AuthService,private router: Router,private api:ApiService) { }
   
@@ -24,6 +26,7 @@ export class AccountMangementService {
 
   
   }
+
  private AuthenticateUserAndSetToken(username:string, password:string) 
  {    
  
@@ -51,15 +54,21 @@ export class AccountMangementService {
 
 
  }
+ 
  PostAuthenticationSucess(tokenresult:any)
  {
-   alert(tokenresult.userid);
-   this.LoggedinUserId = tokenresult.userid;
-  this.OnLoginCompletedEvent.emit(true);
-  location.replace("/");
+   
+  //this.LoggedinUserId.next(tokenresult.userid);
+  
+  this.OnLoginCompletedEvent.emit(true);  
+      this.router.navigate(["/StartExam"]);
+
+  
+
+
    sessionStorage.setItem("token",tokenresult.access_token);
    sessionStorage.setItem("userid",tokenresult.userid);
-  
+   sessionStorage.setItem("RoleId",tokenresult.RoleId);
    
  }
   

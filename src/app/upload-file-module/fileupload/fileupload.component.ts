@@ -11,7 +11,7 @@ import {FileService} from '../services/fileupload.service';
 })
 export class FileuploadComponent implements OnInit {
   private formData: FormData = new FormData();
-@Input()  Description : string ;
+@Input()  InputFormData : any ;
 
   constructor(private fileService:FileService) { }
 
@@ -34,10 +34,8 @@ export class FileuploadComponent implements OnInit {
 
 OnSubmitClick()
 {
-  var parameters = {
-    description: this.Description,
-    
-}
+  var parameters = this.InputFormData;
+  debugger;
   this.fileService.upload(this.formData,parameters)
   .subscribe(
   success => {

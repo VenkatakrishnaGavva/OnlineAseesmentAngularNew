@@ -1,0 +1,132 @@
+<div *ngIf="this.IsUpdateSuccess" class="alert alert-success" >
+  <strong>User Successfully Created!</strong>
+  
+</div>
+ 
+
+      <form class="well form-horizontal" [formGroup]="userRegistrationForm" (ngSubmit)="PostUserCreationSubmitted(this.userRegistrationForm)">
+  <fieldset>
+    <div class="form-group">
+    <mat-spinner  *ngIf="userRegistrationprocessStarted"></mat-spinner> 
+   </div>
+    <!-- Text input-->
+  <div class="form-group">
+      <label class="col-md-4 control-label" >User Name</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input  name="userName" formControlName="userName" placeholder="User Name" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+    <div class="form-group"   *ngIf="userRegistrationForm.get('userName').errors &&
+    userRegistrationForm.get('userName').dirty">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4 inputGroupContainer">
+        <div *ngIf="userRegistrationForm.get('userName').errors.IsUserExistsConditionFailed" class="input-group alert-danger">
+         User name is already exists!
+        </div>
+        <div *ngIf="userRegistrationForm.get('userName').errors.required" class="input-group alert-danger">
+            User name is required!
+           </div>
+        </div>
+   </div>
+     
+   
+  <div class="form-group">
+    <label class="col-md-4 control-label">First Name</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="first_name"  placeholder="First Name" class="form-control" formControlName="FirstName"  type="text">
+      </div>
+    </div>
+  </div>
+  <div class="form-group"   *ngIf="userRegistrationForm.get('FirstName').errors &&
+  userRegistrationForm.get('FirstName').dirty &&
+  userRegistrationForm.get('FirstName').errors.required">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4 inputGroupContainer">
+      <div class="input-group alert-danger">
+    First Name is required!
+      </div>
+      </div>
+ </div>
+  <!-- Text input-->
+  
+  <div class="form-group">
+    <label class="col-md-4 control-label" >Last Name</label> 
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="last_name" placeholder="Last Name" class="form-control" formControlName="LastName"  type="text">
+      </div>
+    </div>
+  </div>
+  <div class="form-group"   *ngIf="userRegistrationForm.get('LastName').errors &&
+  userRegistrationForm.get('LastName').dirty &&
+  userRegistrationForm.get('LastName').errors.required">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4 inputGroupContainer">
+      <div class="input-group alert-danger">
+    Last Name is required!
+      </div>
+      </div>
+ </div>
+  <!-- Text input-->
+         <div class="form-group">
+    <label class="col-md-4 control-label">E-Mail</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+    <input name="email" placeholder="E-Mail Address" class="form-control" formControlName="EmailAddress"  type="text">
+      </div>
+    </div>
+  </div>
+  <div class="form-group"   *ngIf="userRegistrationForm.get('EmailAddress').errors &&
+  userRegistrationForm.get('EmailAddress').dirty &&
+  userRegistrationForm.get('EmailAddress').errors.required">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4 inputGroupContainer">
+      <div class="input-group alert-danger">
+          Email Address is required!
+      </div>
+      </div>
+ </div>
+
+ 
+  <div class="form-group">
+    <label class="col-md-4 control-label" >Role Name</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <select formControlName="RoleId" id="rolename" class="form-control">
+      <option></option>
+      <option *ngFor="let role of  RoleNameList"
+              [value]="role.RoleId" >
+        {{role.RoleName}}
+      </option>
+    </select> 
+  </div>
+    </div>
+  </div>
+  <div class="form-group"   *ngIf="this.userRegistrationForm.get('RoleId').errors &&
+this.userRegistrationForm.get('RoleId').dirty">
+<label class="col-md-4 control-label"></label>
+<div class="col-md-4 inputGroupContainer">
+  <div *ngIf="this.userRegistrationForm.get('RoleId').errors.required" class="input-group alert-danger">
+      Role Name is required!
+     </div>  
+ </div>
+ </div>
+ <!-- Button -->
+ <div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit"  [disabled]="!userRegistrationForm.valid" class="btn btn-warning" >Update user <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+  </fieldset>
+  </form>
+
+      

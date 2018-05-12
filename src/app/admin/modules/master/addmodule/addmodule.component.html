@@ -1,4 +1,9 @@
-<form class="well form-horizontal" [formGroup]="moduleCreationForm">
+
+<div *ngIf="this.isModuleCreationSuccess" class="alert alert-success" >
+  <strong>Module Successfully Created!</strong>
+  
+</div>
+<form class="well form-horizontal" [formGroup]="moduleCreationForm" (ngSubmit)="PostModuleCreationSubmitted(this.moduleCreationForm)">
     <fieldset>
     
      
@@ -52,7 +57,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label"></label>
       <div class="col-md-4">
-        <button type="submit"  [disabled]="!moduleCreationForm.valid" class="btn btn-warning" >Create user <span class="glyphicon glyphicon-send"></span></button>
+        <button type="submit"  [disabled]="!moduleCreationForm.valid" class="btn btn-warning" >Create Module <span class="glyphicon glyphicon-send"></span></button>
       </div>
     </div>
     

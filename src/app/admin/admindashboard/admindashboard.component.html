@@ -10,6 +10,7 @@
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
+          
         </section>
 
     <!-- Main content -->
@@ -34,7 +35,7 @@
                 <li><a [routerLink]="['/dashboard/master/AddModule']" >Add Module</a></li>
                 <li><a [routerLink]="['/dashboard/master/AddPermission']" >Add Permission</a></li>
                 <li><a [routerLink]="['/dashboard/master/AddRole']" >Add role</a></li>
-                <li><a [routerLink]="['/dashboard/master/MapRoleModulePermission']" >Add role</a></li>
+                <li><a [routerLink]="['/dashboard/master/MapRoleModulePermission']" >Map Role Module Permission</a></li>
              
               </ul>
             </div>
@@ -191,6 +192,6 @@
       </div>   
      
       </section>
-     <router-outlet (activate)='onActivate($event)'(deactivate)='onDeActivate($event)' ></router-outlet>
+     <router-outlet (activate)='onActivate($event)' ></router-outlet>
        
     

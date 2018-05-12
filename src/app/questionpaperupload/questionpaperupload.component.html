@@ -1,3 +1,61 @@
-<input type="text" [(ngModel)]="ExamDescription"/>
-<app-fileupload [Description]="ExamDescription" ></app-fileupload>
 
+
+
+<div *ngIf="this.isUploadSuccess" class="alert alert-success" >
+    <strong>Question Paper Upload successfully Completed!</strong>
+    
+  </div>
+  <form class="well form-horizontal" [formGroup]="QuestionPaperCreationform">
+      <fieldset>
+      
+       
+      <!-- Text input-->
+      <div class="form-group">
+          <label class="col-md-4 control-label" >QuestionPaper Name</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input  name="QuestionPaperName" formControlName="QuestionPaperName" placeholder="Module Name" class="form-control"  type="text">
+            </div>
+          </div>
+        </div>
+        <div class="form-group"   *ngIf="QuestionPaperCreationform.get('QuestionPaperName').errors &&
+        QuestionPaperCreationform.get('QuestionPaperName').dirty">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4 inputGroupContainer">
+            <div *ngIf="QuestionPaperCreationform.get('QuestionPaperName').errors.required" class="input-group alert-danger">
+                Questionpaper name is required!
+               </div>  
+        
+           
+            </div>
+       </div>
+         
+       <div class="form-group">
+          <label class="col-md-4 control-label" >Description</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input  name="Description" type="text" formControlName="Description" placeholder="Descrption" class="form-control"  type="text">
+            </div>
+          </div>
+        </div>
+        <div class="form-group"   *ngIf="QuestionPaperCreationform.get('Description').errors &&
+        QuestionPaperCreationform.get('Description').dirty &&
+        QuestionPaperCreationform.get('Description').errors.required">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group alert-danger">
+                Description is required!
+            </div>
+            </div>
+       </div>
+       <div class="form-group">
+       <app-fileupload [InputFormData]="this.QuestionPaperCreationform.value" ></app-fileupload>
+      </div>
+      <!-- Button -->
+     
+      
+      </fieldset>
+      </form>
+      

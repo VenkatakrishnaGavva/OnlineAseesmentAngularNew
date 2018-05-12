@@ -1,10 +1,10 @@
-<div *ngIf="this.isUserCreationSuccess" class="alert alert-danger" >
+<div *ngIf="this.isUserCreationSuccess" class="alert alert-success" >
   <strong>User Successfully Created!</strong>
   
 </div>
  
 
-      <form class="well form-horizontal" [formGroup]="userRegistrationForm" (ngSubmit)="OnFormSubmit()">
+      <form class="well form-horizontal" [formGroup]="userRegistrationForm" (ngSubmit)="PostUserCreationSubmitted(this.userRegistrationForm)">
   <fieldset>
   
    
@@ -36,7 +36,7 @@
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-      <input  name="userName" formControlName="Password" placeholder="Password" class="form-control"  type="text">
+      <input  name="Password" formControlName="Password" placeholder="Password" class="form-control"  type="Password">
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-      <input  name="ConfirmPassword" formControlName="ConfirmPassword" placeholder="Confirm password" class="form-control"  type="text">
+      <input  name="ConfirmPassword" formControlName="ConfirmPassword" placeholder="Confirm password" class="form-control"  type="password">
         </div>
       </div>
     </div>
@@ -131,15 +131,39 @@
       </div>
       </div>
  </div>
- <mat-spinner  *ngIf="loginprocessStarted"></mat-spinner>  
-  <!-- Button -->
+ <mat-spinner  *ngIf="userRegistrationprocessStarted"></mat-spinner>  
+ 
   <div class="form-group">
-    <label class="col-md-4 control-label"></label>
-    <div class="col-md-4">
-      <button type="submit"  [disabled]="!userRegistrationForm.valid" class="btn btn-warning" >Create user <span class="glyphicon glyphicon-send"></span></button>
+    <label class="col-md-4 control-label" >Role Name</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <select formControlName="RoleId" id="rolename" class="form-control">
+      <option></option>
+      <option *ngFor="let role of  RoleNameList"
+              [value]="role.RoleId" >
+        {{role.RoleName}}
+      </option>
+    </select> 
+  </div>
     </div>
   </div>
-  
+  <div class="form-group"   *ngIf="this.userRegistrationForm.get('RoleId').errors &&
+this.userRegistrationForm.get('RoleId').dirty">
+<label class="col-md-4 control-label"></label>
+<div class="col-md-4 inputGroupContainer">
+  <div *ngIf="this.userRegistrationForm.get('RoleId').errors.required" class="input-group alert-danger">
+      Role Name is required!
+     </div>  
+ </div>
+ </div>
+ <!-- Button -->
+ <div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit"  [disabled]="!userRegistrationForm.valid" class="btn btn-warning" >Create user <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
   </fieldset>
   </form>
 
