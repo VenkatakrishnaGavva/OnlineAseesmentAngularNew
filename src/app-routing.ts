@@ -23,6 +23,7 @@ import { ShowAllUsersComponent } from './app/admin/modules/master/add-user/show-
 import { EdituserComponent } from './app/admin/modules/master/add-user/edituser/edituser.component';
 import { CreateAssessmentComponent } from './app/admin/modules/assessment/create-assessment/create-assessment.component';
 import { MapUserToAssessmentComponent } from './app/admin/modules/assessment/map-user-to-assessment/map-user-to-assessment.component';
+import { AssessmentReviewComponent } from './app/admin/modules/assessment/assessment-review/assessment-review.component';
 
 const routes: Route[] = [
   {
@@ -88,6 +89,10 @@ const routes: Route[] = [
             {
               path: "MapUserToAssessment",
               component: MapUserToAssessmentComponent
+            },
+            {
+              path: "AssessmentReview",
+              component: AssessmentReviewComponent
             }
            
            

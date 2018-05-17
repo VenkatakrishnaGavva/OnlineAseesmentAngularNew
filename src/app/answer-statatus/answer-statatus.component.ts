@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,EventEmitter,Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Question } from '../question-paper/Shared/questionmodel.model';
 
 @Component({
@@ -8,35 +8,27 @@ import { Question } from '../question-paper/Shared/questionmodel.model';
 })
 export class AnswerStatatusComponent implements OnInit {
 
-  @Input() questionsList : Question[];
-  @Input() questionNumber:number;
-  @Input() answerStatusButtonsForRow :number;
+  @Input() questionsList: Question[];
+
+
   @Output() OnQuestionNumberClick: EventEmitter<number> = new EventEmitter<number>();
-  constructor() { 
+  constructor() {
 
   }
 
   ngOnInit() {
-   
-  }
-  createRange(){
-    var items: number[] = [];
-    
-    for(var i = 1; i <= this.answerStatusButtonsForRow; i++){
-     items.push(i);
-      
-      
-    }
-    return items;
-  }
-  applyGreenOrRed(index : number) : string
-  {
-return this.questionsList[index+this.questionNumber-1].isOptionSelected === true ? 'green' : 'red' 
+
   }
 
-  onQuestionClick(ind)
-  {
-  
-this.OnQuestionNumberClick.emit(this.questionNumber + ind);
+  applyGreenOrRed(index: number): string {
+    if (this.questionsList[index]) {
+      return this.questionsList[index].isOptionSelected === true ? 'green' : 'red';
+    }
+
+  }
+
+  onQuestionClick(ind) {
+
+    this.OnQuestionNumberClick.emit(ind);
   }
 }

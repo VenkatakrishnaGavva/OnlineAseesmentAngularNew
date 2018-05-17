@@ -47,7 +47,6 @@ export class MapUserToAssessmentComponent implements OnInit {
 let UserAssessmentData:any={};
 UserAssessmentData.UserId =  this.mapUserToAssessmentCreationForm.value.UserId;
 UserAssessmentData.AssessmentId =  this.mapUserToAssessmentCreationForm.value.AssessmentId;
-debugger;
  this.assessmentService.MapAnAssessmentToUser(UserAssessmentData).subscribe(
    response=>{}
  );

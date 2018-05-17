@@ -1,0 +1,67 @@
+
+  <form class="well form-horizontal" [formGroup]="reviewForm" (ngSubmit)="SubmitFormData()">
+    <fieldset>
+       
+      
+  
+     
+    
+  
+     <div class="form-group">
+      <label class="col-md-4 control-label" >Assessment Name</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <select formControlName="AssessmentId" (change)="OnAssessmentChange($event)" id="AssessmentId" class="form-control">
+        <option></option>
+        <option *ngFor="let assessment of this.AssessmentNameList"
+                [value]="assessment.AssessmentId"  >
+          {{assessment.AssessmentName}}
+        </option>
+      </select> 
+    </div>
+      </div>
+    </div>
+    <div class="form-group"   *ngIf="this.reviewForm.get('AssessmentId').errors &&
+this.reviewForm.get('AssessmentId').dirty">
+<label class="col-md-4 control-label"></label>
+<div class="col-md-4 inputGroupContainer">
+    <div *ngIf="this.reviewForm.get('AssessmentId').errors.required" class="input-group alert-danger">
+        Assessment Name is required!
+       </div>  
+   </div>
+   </div>
+
+
+   <div class="form-group" *ngIf="this.UsersList">
+    <label class="col-md-4 control-label" >User Name</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <select formControlName="UserId"  id="UserId" class="form-control" (change)="OnUserChange($event)">
+      <option></option>
+      <option *ngFor="let user of this.UsersList"
+              [value]="user.UserId"  >
+        {{user.Username}}
+      </option>
+    </select> 
+  </div>
+    </div>
+  </div>
+  <div class="form-group"   *ngIf="this.reviewForm.get('UserId').errors &&
+this.reviewForm.get('UserId').dirty">
+<label class="col-md-4 control-label"></label>
+<div class="col-md-4 inputGroupContainer">
+  <div *ngIf="this.reviewForm.get('UserId').errors.required" class="input-group alert-danger">
+      User Name is required!
+     </div>  
+ </div>
+ </div>
+
+
+   
+    
+    </fieldset>
+    </form>
+    <app-question-paper  ></app-question-paper>
+

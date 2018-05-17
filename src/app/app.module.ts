@@ -67,6 +67,7 @@ import { SideNavBarMenuService } from './layouts/navbars/sidenavbar/services/sid
 import { CreateAssessmentComponent } from './admin/modules/assessment/create-assessment/create-assessment.component';
 import { AssessmentService } from './admin/modules/assessment/services/assessment.service';
 import { MapUserToAssessmentComponent } from './admin/modules/assessment/map-user-to-assessment/map-user-to-assessment.component';
+import { AssessmentReviewComponent } from './admin/modules/assessment/assessment-review/assessment-review.component';
 
 
 
@@ -97,7 +98,8 @@ import { MapUserToAssessmentComponent } from './admin/modules/assessment/map-use
     ShowAllUsersComponent,
     EdituserComponent,
     CreateAssessmentComponent,
-    MapUserToAssessmentComponent
+    MapUserToAssessmentComponent,
+    AssessmentReviewComponent
   ],
   
   providers: [{

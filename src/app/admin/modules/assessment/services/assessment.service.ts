@@ -16,6 +16,17 @@ return this.api.get("api/GetQuestionPaperNames");
   {
 return this.api.get("api/GetAllAssessments");
   }
+  GetAllUsersForAssessment(assessmentId:any):Observable<any>
+  {
+   
+return this.api.get("api/GetUsersForAssessmentForEvaluation?assessmentId="+assessmentId);
+  }
+
+  GetAssessmentForEvaluation(assessmentId:any,userId:any):Observable<any>
+  {
+   
+return this.api.get("api/GetAssessmentToEvaluate?assessmentId="+assessmentId+"&&userid="+userId);
+  }
   GetAllUsers():Observable<any>
   {
    

@@ -5,6 +5,8 @@ id : number;
 QuestionText : string;
 Options :Options[];
 RightOptionId:number;
-isOptionSelected : boolean;
+isOptionSelected : boolean=false;
 SelectedOptionId : number;
+OptionType:string;
+WrittenAnswer:string;
 }

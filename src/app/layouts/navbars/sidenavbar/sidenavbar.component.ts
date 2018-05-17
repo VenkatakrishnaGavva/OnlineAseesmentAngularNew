@@ -14,7 +14,7 @@ public ModuleWisePages:any[];
   this.sideNavBarMenuService.GetModuleWiseMenuPagesForAccess(sessionStorage.getItem("RoleId")).subscribe(
 repsonse=>{
  this.ModuleWisePages = repsonse;
- debugger;
+
 
 }
   );

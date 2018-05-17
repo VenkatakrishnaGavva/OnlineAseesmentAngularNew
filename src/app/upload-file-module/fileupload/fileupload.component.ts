@@ -35,7 +35,7 @@ export class FileuploadComponent implements OnInit {
 OnSubmitClick()
 {
   var parameters = this.InputFormData;
-  debugger;
+
   this.fileService.upload(this.formData,parameters)
   .subscribe(
   success => {

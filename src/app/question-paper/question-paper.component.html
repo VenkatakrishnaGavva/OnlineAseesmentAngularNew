@@ -1,51 +1,73 @@
 <app-topnavbar></app-topnavbar>
-<div class="container">  
-    <div class="row">
-      <div class="col-md-8">
-      <div class="customDiv">
-        <mat-card class="p-3 mb-2 bg-primary"> 
-          Candidate Details
-               </mat-card>
-               <mat-card class="p-3 mb-2 bg-important" >
-                {{currentQuestionIndex+1 }}
-    {{ questions[currentQuestionIndex].QuestionText}}
-                 
-              </mat-card>
-             
+
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="box">
+            <div class="box-header with-border btn-Blue">
+                <h3 class="box-title ">Question Number:{{currentQuestionIndex+1 }}</h3>
+                <div class="box-tools pull-right">
+                    
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body" >
                 <mat-card *ngIf="IsProgressSpinnerVisible">
-  <mat-spinner  style="margin:0 auto;"></mat-spinner>
-  </mat-card>
-  
-   <!-- <mat-radio-button class="example-radio-button"  *ngFor="let option of questions[currentQuestionIndex].Options; let idx = index" [value]="option" [checked]="option.ID === questions[currentQuestionIndex].SelectedOptionId" (click) = "OnOptionSelect(option)">
-      <p>{{option.OptionText}}</p>
-   </mat-radio-button> -->
-  
-  <p *ngFor="let option of questions[currentQuestionIndex].Options; let idx = index" ><mat-radio-button class="example-radio-button" [value]="option" [checked]="option.ID === questions[currentQuestionIndex].SelectedOptionId" (click) = "OnOptionSelect(option)"></mat-radio-button> {{option.OptionText}}</p>
-  
-  <div   *ngIf="currentQuestionIndex>0">
-       <button type="button" (click)="btnPreviousClick()" style="float: left;" class="btn">previous</button>
-   </div>
-   <div *ngIf="currentQuestionIndex<(questions.length-1)"  >
-           <button type="button" (click)="btnNextClick()" style="float: right;"  class="btn">next</button>
-  </div>
-  <div *ngIf="currentQuestionIndex==(questions.length-1)"  >
-    <button type="button" (click)="btnSubmitClick()" style="float: right;"  class="btn">Submit</button>
-  </div>
-      </div>
-      </div>
-      <div class="col-md-4" >
-          <mat-card class="p-3 mb-2 bg-primary"> 
-              Answer Status
-                   </mat-card>
-        <div class="customDiv">
-          <app-answer-statatus (OnQuestionNumberClick)="OnQuestionNumberClick($event)"  *ngFor="let questionNum of createRange();" [questionsList]="questions" [questionNumber] = "questionNum" [answerStatusButtonsForRow]="answerStatusButtonForRow"></app-answer-statatus>    
-  
-        </div> 
-      </div>
+                    <mat-spinner  style="margin:0 auto;"></mat-spinner>
+                    </mat-card>
+                   <pre ><code>{{this.assessment.QuestionPaper && this.assessment.QuestionPaper[currentQuestionIndex] && this.assessment.QuestionPaper[currentQuestionIndex]?.QuestionText}}</code></pre>
+                      <div class="box">
+                        <div class="box-header with-border  btn-Blue" >
+                                <ng-container  *ngIf="IsSingleOptionType(currentQuestionIndex)">
+                            <mat-radio-button  class="example-radio-button" [value]="option" [checked]="option.ID === this.assessment.QuestionPaper[currentQuestionIndex].SelectedOptionId"  (click) = "OnOptionSelect(option)" *ngFor="let option of this.assessment.QuestionPaper[currentQuestionIndex]?.Options; let idx = index"> {{option.OptionText}}</mat-radio-button>
+                                   </ng-container>    
+                                   <ng-container  *ngIf="IsSubjectiveTypeAnswer(currentQuestionIndex)">
+                                        <textarea class="form-control" [(ngModel)]="this.assessment.QuestionPaper[currentQuestionIndex].WrittenAnswer" rows="10"></textarea>
+                         </ng-container>         
+                        </div><!-- /.box-header -->
+                      
+                       
+                    </div>
+                </div><!-- /.box-body -->
+            <div class="box-footer">
+                 <div   *ngIf="currentQuestionIndex>0">
+                        <button type="button" class="btn  btn-Blue" (click)="btnPreviousClick()" style="float: left;" >previous</button>
+                    </div>
+                    <div *ngIf="currentQuestionIndex<(this.assessment.QuestionPaper?.length-1)"  >
+                            <button type="button" (click)="btnNextClick()" style="float: right;"  class="btn btn-Blue">next</button>
+                   </div>
+                   <div *ngIf="currentQuestionIndex==(this.assessment.QuestionPaper?.length-1)"  >
+                     <button type="button" [disabled]="this.IsReviewMode" (click)="btnSubmitClick()" style="float: right;"  class="btn btn-Blue "> Submit</button>
+                   </div>
+            </div><!-- box-footer -->
+        </div>
+           </div>
+ 
+    <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+                
+
+<div class="box">
+        <div class="box-header with-border btn-Blue">
+            <h3 class="box-title">Answer Status</h3>
+            <div class="box-tools pull-right">
       
+            </div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body">
+       
+      
+                <app-answer-statatus (OnQuestionNumberClick)="OnQuestionNumberClick($event)"  [questionsList]="this.assessment.QuestionPaper" ></app-answer-statatus> 
+ 
+      
+        </div><!-- /.box-body -->
+        <div class="box-footer">
+               
+        </div><!-- box-footer -->
     </div>
-    </div>
-  
-    
-  
-   
+          </div>
+      </div>
+      </div>
+  </div>
+
+ 

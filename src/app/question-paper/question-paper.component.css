@@ -18,4 +18,16 @@
     background-color: silver;
     font-size: large;
   }
+
   
+  pre {
+    height: auto;
+    max-height: 400px;
+    overflow: auto;
+    background-color:azure;
+    font-family: "Times New Roman", Times, serif;
+    font-size: large;
+    border-color: #605ca8;;
+  }
+  
+ 

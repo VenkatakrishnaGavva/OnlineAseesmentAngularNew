@@ -1,18 +1,5 @@
-
-        <mat-grid-list cols="5">
-                <mat-grid-tile
-                    *ngFor="let no of createRange();let ind = index;" >
-
-                    <button  class="btn" mat-mini-fab [ngStyle]="{'background-color': applyGreenOrRed(ind)}" (click)="onQuestionClick(ind)"  > <mat-icon >{{questionNumber+ind}}</mat-icon></button>
-                
-                </mat-grid-tile>
-              </mat-grid-list>
-                
-                
-                
-
-   
-
-<!-- <input type="button"value="q"  (click)="onQuestionClick(1)" class="button">
-
-<button class="btn"  (click)="onQuestionClick(1)"  >12</button> -->
+  
+  <div class="btn-group" *ngFor="let question of this.questionsList;let ind = index;">
+                        <button  class="btn" mat-mini-fab [ngStyle]="{'background-color': applyGreenOrRed(ind)}" (click)="onQuestionClick(ind)"  > <mat-icon >{{ind+1}}</mat-icon></button>
+         
+                      </div>
